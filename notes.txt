@@ -1,0 +1,7 @@
+Things that Claude added:
+- Added spin dependence
+    - The exchange integrals only are present if the symmetry between
+      the electrons are the same
+- Phase factor
+    - Depends of the sums of the positions of differing orbitals?
+      Like whether it turns out to be even or odd?

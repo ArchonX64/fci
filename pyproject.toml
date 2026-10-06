@@ -7,4 +7,5 @@ requires-python = ">=3.12"
 dependencies = [
     "numba>=0.68.0",
     "numpy>=2.5.3",
+    "scipy>=1.18.1",
 ]
