@@ -6,6 +6,7 @@ from numba import njit
 from util import *
 from slater import SlaterCondon
 from diag import numpy_diag, david_diag
+from line_profiler import profile
 
 # -- PARAMETERS -------------------------------------
 # Molecular System Params
@@ -22,7 +23,7 @@ configs = np.array(list(itertools.combinations(range(orbitals * 2), electrons)))
 sc = SlaterCondon(configs, h1e, h2e)
 
 @njit
-def process():
+def process(sc, configs):
     '''Sets up 2-D hamiltonian matrix, which gives the energy for each determinant
     and their interaction energies. Solves for the energies of each element using
     Slater-Condon rules.
@@ -50,7 +51,12 @@ def process():
                 case _:
                     pass
     
-    print(np.min(numpy_diag(h)))
-    print(np.min(david_diag(h, guess_vec_len=2, eig=1, tol=1e-9)))
-    
-process()
+    evals = david_diag(h, guess_vec_len=2, eig=1, tol=1e-9)
+
+    return np.min(evals)
+
+@profile
+def profiled():
+    print(f"Ground State Energy: {process(sc, configs)} Hartrees")
+
+profiled()

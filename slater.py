@@ -73,7 +73,7 @@ class SlaterCondon:
 
 
     def e2_kl1(self, det_label: int, m: int, p: int) -> float:
-        ''' Slater-Condon energy value calculator for the one-electron repulsion,
+        ''' Slater-Condon energy value calculator for the two-electron repulsion,
             with one orbital difference
                 
             Energy = <mn||pn> (= [mp|nn] - [mn|np]) foreach n
@@ -100,10 +100,10 @@ class SlaterCondon:
 
 
     def e2_kl2(self, m: int, n: int, p: int, q: int) -> float:
-        ''' Slater-Condon energy value calculator for the one-electron repulsion,
-            with one orbital difference
+        ''' Slater-Condon energy value calculator for the two-electron repulsion,
+            with two orbital differences
                 
-            Energy = <mn||pn> (= [mp|nn] - [mn|np]) foreach n
+            Energy = <mn||pq> (= [mp|nq] - [mq|np])
             Where m and p, m and n are equivalent spins
             
         Args:
@@ -117,3 +117,4 @@ class SlaterCondon:
         coulomb = self.h2e[sm, sp, sn, sq] if spin(m) == spin(p) and spin(n) == spin(q) else 0.0
         exchange = self.h2e[sm, sq, sn, sp] if spin(m) == spin(q) and spin(n) == spin(p) else 0.0
         return coulomb - exchange
+    

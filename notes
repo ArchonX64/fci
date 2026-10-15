@@ -1,0 +1,1 @@
+uv run kernprof -lv fci_scf.py
