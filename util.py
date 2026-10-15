@@ -43,7 +43,20 @@ def oribtal_differences(o1: np.array, o2: np.array) -> list[np.array, np.array]:
 
 @njit
 def get_phase(configs: np.ndarray, o1: int, o1_diffs: np.array, o2: int, o2_diffs: np.array) -> float:
-    
+    '''Determines the sign of each hamiltonian element, which is based on how
+       many electron swaps occured.
+       
+    Args:
+        configs (np.ndarray): The array of electron configurations
+        o1: The index of the first configuration being comapred
+        o2: The index of the second configuration being compared
+        o1_diffs: The determined differences in o1 against o2
+        o2_diffs: The determined differences in o2 against o1
+        
+    Returns:
+        float: Either ~1 or -1, depending on the calculated phase
+        
+    '''
     pf = 0.
     for orbital, diffs in [(o1, o1_diffs), (o2, o2_diffs)]:
         for d in diffs:

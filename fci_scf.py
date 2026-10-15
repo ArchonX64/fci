@@ -19,14 +19,14 @@ h2e: np.ndarray = np.load("resources/h2e.npy")
 
 configs = np.array(list(itertools.combinations(range(orbitals * 2), electrons))) + 1  # Each value represents the i'th electron, can't have zero
 
+sc = SlaterCondon(configs, h1e, h2e)
+
 @njit
 def process():
     '''Sets up 2-D hamiltonian matrix, which gives the energy for each determinant
     and their interaction energies. Solves for the energies of each element using
     Slater-Condon rules.
     '''
-    
-    sc = SlaterCondon(configs, h1e, h2e)
     
     h = np.zeros(shape=(len(configs), len(configs)))
     
